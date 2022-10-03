@@ -8,15 +8,21 @@ export class Glasses {
 
     async getAllGlasses() {
         try{
-
             const glasses = this.collection.find(); 
             return glasses; 
-        
         }catch(err){
-
             console.log(err);
             throw new Error(`Error: ${err}`); 
-            
+        }
+    }
+
+    async getGlassesById(id) {
+        try{
+            const glasses = await this.collection.findById(id);
+            return glasses;
+        }catch(err){
+            console.log(err);
+            throw new Error(`Error: ${err}`);
         }
     }
 }
