@@ -5,7 +5,10 @@ import MongoStore from 'connect-mongo';
 import dotenv from 'dotenv';
 import passport from 'passport';
 import glassesRoutes from './routes/glasses.routes.js';
+import authRoutes from './auth/routes/auth.routes.js';
 import './dataBase/connect.js';
+import './auth/passport/localStrategy.js';
+import './auth/passport/facebookStrategy.js';
 dotenv.config();
 const app = express();
 
@@ -31,7 +34,7 @@ app.use(passport.session());
 
 
 app.use('/glasses', glassesRoutes);
-
+app.use('/auth', authRoutes);
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 0;

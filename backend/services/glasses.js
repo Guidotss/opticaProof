@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { glassesSchema } from '../models/glassesModel.js';
+import { glassesSchema } from '../models/glassesSchema.js';
 
 export class Glasses {
     constructor() {
