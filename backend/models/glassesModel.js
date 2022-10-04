@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 export const glassesSchema = new mongoose.Schema({
-    name: {
+    model: {
         type: String,
         required: true,
     },

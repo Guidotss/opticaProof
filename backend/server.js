@@ -4,7 +4,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import dotenv from 'dotenv';
 import passport from 'passport';
-import homeRoutes from './routes/home.routes.js';
+import glassesRoutes from './routes/glasses.routes.js';
 import './dataBase/connect.js';
 dotenv.config();
 const app = express();
@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use('/', homeRoutes);
+app.use('/glasses', glassesRoutes);
 
 
 // eslint-disable-next-line no-undef

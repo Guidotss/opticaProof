@@ -29,3 +29,37 @@ export async function getGlassesById( req, res ){
         
     }
 }
+
+export async function createGlasses( req, res ){
+    try{
+            
+        const newGlasses = await glassesClass.createGlasses(req.body);
+        return res.status(201).json({newGlasses});
+    
+    }catch(err){
+                
+        console.log(err);
+        return res.status(500).json({error: `Error: ${err}`});
+        
+    }
+}
+
+export async function updatedGlasses( req, res ){
+    try{
+        const updatedGlasses = await glassesClass.updateGlasses(req.params.id, req.body);
+        return res.status(200).json({updatedGlasses});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({error: `Error: ${err}`});
+    }
+} 
+
+export async function deleteGlasses( req, res ){
+    try{
+        const deletedGlasses = await glassesClass.deleteGlasses(req.params.id);
+        return res.status(200).json({deletedGlasses});
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({error: `Error: ${err}`});
+    }
+}
