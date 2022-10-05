@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'; 
 import { useForm } from '../../hooks'
-import { Grid,TextField,Button,Typography } from '@mui/material'; 
+import { Grid,TextField,Button,Typography,Link } from '@mui/material'; 
 import { AuthLayOut } from '../layouts/AuthLayOut'; 
 import { Facebook } from '@mui/icons-material'; 
 
@@ -16,6 +16,10 @@ export const LoginPage = () => {
 
     e.preventDefault(); 
     console.log({email,password}); 
+  }
+
+  const onFacebookLogin = () => {
+    console.log('onFacebookLogin'); 
   }
 
   return (
@@ -54,12 +58,18 @@ export const LoginPage = () => {
               </Grid>
 
               <Grid item xl={6} xs={6} sm={6} sx={{mt:2}}>
-                <Button type='submit' variant='contained' fullWidth sx={{padding:2,borderRadius:3}}>
+                <Button type='submit' variant='contained' fullWidth sx={{padding:2,borderRadius:3}} onClick={ onFacebookLogin }>
                   <Facebook/>
-                  <Typography sx={{ml:1}}>Facebook</Typography>
+                  <Typography sx={{ml:1}} >Facebook</Typography>
                 </Button>
               </Grid>
 
+            </Grid>
+
+            <Grid container direction='row' justifyContent='flex-end'>
+                  <Link sx={{textDecoration:'none',color:'blue'}} component={ RouterLink } color='inherit' to='/auth/register' >
+                      Crear una Cuenta
+                  </Link>
             </Grid>
 
         </Grid>
