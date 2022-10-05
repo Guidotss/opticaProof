@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import jwt from 'jsonwebtoken'; 
@@ -38,7 +39,17 @@ passport.use('login', new localStatregy({
         console.log("no user");  
         return done(null, false, {message: 'Incorrect email or password'});
     }else{
-        const token = jwt.sign({id: user._id,displayName:user.displayName}, `${process.env.JSON_WEB_TOKEN_SECRET}`, {expiresIn: 86400});
+        const token = jwt.sign({
+            id: user._id,
+            isAdmin:user.isAdmin,
+            displayName:user.displayName
+        },
+
+            `${process.env.JSON_WEB_TOKEN_SECRET}`,
+            {
+                expiresIn: 86400
+            }
+        );
         
         return done(null, user, {token: token});
     }

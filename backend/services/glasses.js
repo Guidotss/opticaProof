@@ -28,6 +28,9 @@ export class Glasses {
     
     async createGlasses(glasses) {
         try{
+            if(JSON.stringify(glasses) === '{}'){
+                throw new Error('Glasses is required');
+            }
             const newGlasses = await this.collection.create(glasses);
             return newGlasses;
         }catch(err){
@@ -38,6 +41,9 @@ export class Glasses {
 
     async updateGlasses(id, glasses) {
         try{
+            if(JSON.stringify(glasses) === '{}'){
+                throw new Error('Glasses is required');
+            }
             const updatedGlasses = await this.collection.findByIdAndUpdate(id, glasses, {new: true});
             return updatedGlasses;
         }catch(err){
