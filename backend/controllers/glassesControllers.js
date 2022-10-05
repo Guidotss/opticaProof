@@ -4,43 +4,28 @@ const glassesClass = new Glasses();
 
 export async function getAllGlasses( _req, res ){
     try{
-
         const glasses = await glassesClass.getAllGlasses();
         return res.status(200).json({glasses});
-
     }catch(err){
-            
-        console.log(err);
         return res.status(500).json({error: `Error: ${err}`});
-    
     }
 }
 
 export async function getGlassesById( req, res ){
     try{
-            
         const glasses = await glassesClass.getGlassesById(req.params.id);
         return res.status(200).json({glasses});
-    
-    }catch(err){
-                
-        console.log(err);
+    }catch(err){  
         return res.status(404).json({error: `Error: ${err}`});
-        
     }
 }
 
 export async function createGlasses( req, res ){
-    try{
-            
+    try{  
         const newGlasses = await glassesClass.createGlasses(req.body);
         return res.status(201).json({newGlasses});
-    
     }catch(err){
-                
-        console.log(err);
         return res.status(500).json({error: `Error: ${err}`});
-        
     }
 }
 
@@ -49,7 +34,6 @@ export async function updatedGlasses( req, res ){
         const updatedGlasses = await glassesClass.updateGlasses(req.params.id, req.body);
         return res.status(200).json({updatedGlasses});
     }catch(err){
-        console.log(err);
         return res.status(500).json({error: `Error: ${err}`});
     }
 } 

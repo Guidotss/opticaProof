@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import mongoose from 'mongoose';
 import { DB_CONFIG } from './config.js';
 
@@ -12,8 +13,6 @@ export const DB_CONNECT = () => {
             })
 
     }catch(err){
-        console.log(err);
-        // eslint-disable-next-line no-undef
         process.exit(1); 
     }
 }
