@@ -2,7 +2,7 @@ import { Router } from 'express';
 import passport from 'passport';
 
 const router = Router();
-let userOBJ = {};
+
 
 router.get('/login/facebook', passport.authenticate('facebook'));
 router.get('/login/facebook/callback', passport.authenticate('facebook',{
