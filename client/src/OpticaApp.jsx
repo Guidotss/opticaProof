@@ -3,6 +3,7 @@ import { AppRouter } from './router/AppRouter';
 
 
 export const OpticaApp = () => {
+
   return (
     <OpticaTheme>
         <AppRouter/>
