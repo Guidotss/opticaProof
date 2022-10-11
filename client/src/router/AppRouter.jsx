@@ -2,12 +2,16 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
 import { GlassesRoutes } from '../glasses/routes/GlassesRoutes'
 import { useSelector } from 'react-redux'; 
+import { useAuthStore } from '../hooks';
+import { CheckingAuth } from '../ui'
 
 
 export const AppRouter = () => {
 
-  const { status } = useSelector(state => state.auth); 
+  const { status } = useAuthStore(); 
 
+  if(status === 'authenticating') return <CheckingAuth /> 
+  
   return (
     <Routes>
         {

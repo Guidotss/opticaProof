@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
-const userSchema = new mongoose.Schema({
+
+export const userSchema = new mongoose.Schema({
     displayName: {
         type: String,
         required :true,
@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
     },
     image:{
         type: String,
@@ -24,16 +25,5 @@ const userSchema = new mongoose.Schema({
     },
 }); 
 
-userSchema.methods.encryptPassword =  ( password ) => {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-}
-
-userSchema.methods.comparePassword = ( password, hash ) => {
-    return bcrypt.compareSync(password, hash);
-}
-
-
-const User = mongoose.model( "User", userSchema );
-export default User;
 
 

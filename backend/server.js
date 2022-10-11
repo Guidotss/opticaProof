@@ -4,10 +4,10 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import dotenv from 'dotenv';
 import passport from 'passport';
+import cors from 'cors';
 import glassesRoutes from './routes/glasses.routes.js';
 import authRoutes from './auth/routes/auth.routes.js';
 import './dataBase/connect.js';
-import './auth/passport/localStrategy.js';
 import './auth/passport/facebookStrategy.js';
 dotenv.config();
 const app = express();
@@ -31,7 +31,7 @@ app.use(session({
 })); 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(cors()); 
 
 app.use('/glasses', glassesRoutes);
 app.use('/auth', authRoutes);

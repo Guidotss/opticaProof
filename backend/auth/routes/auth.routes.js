@@ -1,5 +1,8 @@
 import { Router } from 'express'; 
 import passport from 'passport';
+import { check } from 'express-validator';
+import { login,registerUser } from '../../controllers/authController';
+import { validateErrors } from '../../auth/middlewares/validate-errors';
 
 const router = Router();
 
@@ -9,19 +12,30 @@ router.get('/login/facebook/callback', passport.authenticate('facebook',{
     session: false,
 })); 
 
-router.post('/signUp', passport.authenticate('SignUp', {
-    failureRedirect: '/login',
-    session: false,
-    successRedirect: '/glasses',
-})); 
+router.post(
+    '/register',
+    [
+        check('displayName', 'Name is required').not().isEmpty(),
+        check('displayName', 'Name must be at least 3 characters').isLength({min: 3}),
+        check('email', 'Email is required').isEmail(),
+        check('password', 'Password is required').not().isEmpty(),
+        check('password', 'Password must be at least 6 characters').isLength({min: 6}), 
+    ],
+    validateErrors,
+    registerUser
+)
 
-router.post('/login', passport.authenticate('login', {
-    failureRedirect: 'http://localhost:8080/glasses',
-    session: false,
-}),(req,res) => {
-    const { token } = req.authInfo; 
-    res.cookie('token', token, {httpOnly: true});
-    return res.redirect('http://localhost:8080/glasses');
-});
+
+router.post(
+    '/login',
+    [
+        check('email', 'Email is required').isEmail(),
+        check('password', 'Password is required').not().isEmpty(),
+
+    ],
+    validateErrors,
+    login
+)
+
 
 export default router;

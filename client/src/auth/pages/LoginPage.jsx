@@ -1,21 +1,24 @@
 import { Link as RouterLink } from 'react-router-dom'; 
-import { useForm } from '../../hooks'
+import { useAuthStore, useForm } from '../../hooks'
 import { Grid,TextField,Button,Typography,Link } from '@mui/material'; 
 import { AuthLayOut } from '../layouts/AuthLayOut'; 
 import { Facebook } from '@mui/icons-material'; 
 
 
+const formFields = {
+  email:'',
+  password:''
+}
+
 export const LoginPage = () => {
 
-  const { email, password, handleChange,reset } = useForm({
-      email: 'guidolguin2@gmail.com',
-      password: '123456'
-  }); 
+  const { email, password,onInputChange,onResetForm } = useForm( formFields );
+  const { startLogin } = useAuthStore();
 
   const onSubmit = (e) => {
 
     e.preventDefault(); 
-    console.log({email,password}); 
+    startLogin({email, password}); 
   }
 
   const onFacebookLogin = () => {
@@ -32,7 +35,7 @@ export const LoginPage = () => {
                   variant="outlined"
                   fullWidth
                   value={email}
-                  onChange={handleChange}
+                  onChange={ onInputChange }
                   name='email'
                   sx={{mb:1,mt:2}}
                 />
@@ -43,7 +46,7 @@ export const LoginPage = () => {
                   variant="outlined"
                   fullWidth
                   value={password}
-                  onChange={handleChange}
+                  onChange={ onInputChange }
                   name='password'
                   type="password"
                   placeholder="********"
