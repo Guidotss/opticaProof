@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { opticaApi } from '../api'
-import { checkingCredentials } from "../store/auth/authSlice";
+import { checkingCredentials, login, logOut } from "../store/auth/authSlice";
 
 
 export const useAuthStore = () => {
@@ -10,10 +10,17 @@ export const useAuthStore = () => {
     const startLogin = async ({ email, password }) => {
         dispatch(checkingCredentials()); 
         try{
-            const resp = await opticaApi.post('/auth/login', { email, password });
-            console.log(resp);
+            const { data } = await opticaApi.post('/auth/login', { email, password });
+            if(data.ok){
+                const {name, email, isAdmin, uid, token} = data; 
+                localStorage.setItem('token',token);
+                localStorage.setItem('token-init-date', new Date().getTime());
+                dispatch(login({displayName:name, email, isAdmin, uId:uid, token}));
+            }
+
         }catch(error){
-            console.log(error);
+            const {errors} = error.response.data; 
+            dispatch(logOut({errorMessage:errors})); 
         }
     }
 
