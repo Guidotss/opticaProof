@@ -5,11 +5,14 @@ import { checkingCredentials, clearErrorMessage, login, logOut } from "../store/
 
 
 export const useAuthStore = () => {
+
     const dispatch = useDispatch(); 
     const { status, user, errorMessage } = useSelector((state) => state.auth);
 
     const startLogin = async ({ email, password }) => {
+
         dispatch(checkingCredentials()); 
+
         try{
             const { data } = await opticaApi.post('/auth/login', { email, password });
             if(data.ok){
@@ -36,10 +39,10 @@ export const useAuthStore = () => {
     }
 
     const startRegister = async({displayName, email ,password}) => {
+
         dispatch(checkingCredentials()); 
 
         try{
-            console.log({displayName, email, password});
             const { data } = await opticaApi.post('/auth/register', { displayName, email, password });
             if(data.ok){
                 dispatch(login({ email, password })); 
@@ -92,7 +95,6 @@ export const useAuthStore = () => {
             if(result.ok){
                 const { displayName, email, uid, accessToken,providerId} = result; 
                 const { data } = await opticaApi.post('/auth/login/google', { id_token:accessToken, name:displayName, providerId });
-                console.log(data);
                 
                 if(data.ok){
                     localStorage.setItem('token',data.token);
