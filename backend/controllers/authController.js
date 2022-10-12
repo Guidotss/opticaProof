@@ -21,7 +21,7 @@ export const registerUser = async(req,res) => {
             });
         }else{
 
-            const token = jwt.sign({id: newUser._id}, process.env.JSON_WEB_TOKEN_SECRET, {
+            const token = jwt.sign({ id: newUser._id, name:newUser.displayName }, process.env.JSON_WEB_TOKEN_SECRET, {
                 expiresIn: 60*60*24
             }); 
             return res.status(201).json({
@@ -51,10 +51,10 @@ export const login = async(req,res) => {
         
         const userFound = await user.login(email,password);
 
-        if(userFound == false){
+        if(!userFound){
             return res.status(401).json({message: 'Invalid credentials'});
         }else{
-            const token = jwt.sign({id: userFound._id}, process.env.JSON_WEB_TOKEN_SECRET, {
+            const token = jwt.sign({id: userFound._id, name:userFound.displayName }, process.env.JSON_WEB_TOKEN_SECRET, {
                 expiresIn: 60 * 60 * 24
             });
             return res.status(200).json({
@@ -75,4 +75,67 @@ export const login = async(req,res) => {
         });
     }
     
+}
+
+export const googleLogin = async(req,res) => {
+    const { idToken, displayName,providerId } = req.body;
+
+    try{
+        const token = jwt.sign({id: idToken, name:displayName, providerId }, process.env.JSON_WEB_TOKEN_SECRET, {
+            expiresIn: 60 * 60 * 24
+        });
+        return res.status(200).json({
+            ok: true,
+            message: 'User logged in',
+            token,
+            
+        });
+
+    }catch(error){
+        return res.status(500).json({
+            ok: false,
+            message: 'Unexpected error'
+        });
+    }
+
+}
+
+export const renewToken = async(req,res) => {
+    
+    try{
+
+        const { uid,name } = req;
+        if(req.providerId !== undefined){
+            const token = jwt.sign({ id: uid, name,providerId:req.providerId }, process.env.JSON_WEB_TOKEN_SECRET, {
+                expiresIn: 60 * 60 * 24
+            });
+            return res.status(200).json({
+                ok: true,
+                message: 'Token renewed',
+                uid,
+                name,
+                token
+            });
+        }else{
+            const token = jwt.sign({ id: uid, name }, process.env.JSON_WEB_TOKEN_SECRET, {
+                expiresIn: 60 * 60 * 24
+            });
+            return res.status(200).json({
+                ok: true,
+                message: 'Token renewed',
+                uid,
+                name,
+                token
+            });
+        }
+        
+        
+        
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            message: 'Unexpected error'
+        })
+    }
 }

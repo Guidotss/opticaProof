@@ -1,8 +1,10 @@
-import { Link as RouterLink } from 'react-router-dom'; 
+import { Link as RouterLink, useNavigate } from 'react-router-dom'; 
 import { useAuthStore, useForm } from '../../hooks'
 import { Grid,TextField,Button,Typography,Link } from '@mui/material'; 
 import { AuthLayOut } from '../layouts/AuthLayOut'; 
-import { Facebook } from '@mui/icons-material'; 
+import { Google } from '@mui/icons-material'; 
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 
 const formFields = {
@@ -12,8 +14,9 @@ const formFields = {
 
 export const LoginPage = () => {
 
+  const navigate = useNavigate();
   const { email, password,onInputChange,onResetForm } = useForm( formFields );
-  const { startLogin } = useAuthStore();
+  const { startLogin,errorMessage,startLoginWithGoogle } = useAuthStore();
 
   const onSubmit = (e) => {
 
@@ -21,9 +24,15 @@ export const LoginPage = () => {
     startLogin({email, password}); 
   }
 
-  const onFacebookLogin = () => {
-    console.log('onFacebookLogin'); 
+  const onGoogleLogin = () => {
+    startLoginWithGoogle();
   }
+
+  useEffect(() => {
+    if(errorMessage !== undefined){
+      Swal.fire('Error en la autenticación',errorMessage,'error');
+    }
+  },[errorMessage])
 
   return (
     <AuthLayOut title='Login'>
@@ -57,22 +66,22 @@ export const LoginPage = () => {
             <Grid container spacing={2} sx={{mb:2}}>
 
               <Grid item xl={6} xs={6} sm={6} sx={{mt:2}}>
-                <Button type='submit' variant='contained' fullWidth sx={{padding:2, borderRadius:3}} onClick={ onSubmit }>Login</Button>
+                <Button type='submit' variant='contained' fullWidth sx={{padding:2, borderRadius:3, fontWeight:'bold',fontSize:'15px' }} onClick={ onSubmit }>Login</Button>
               </Grid>
 
               <Grid item xl={6} xs={6} sm={6} sx={{mt:2}}>
-                <Button type='submit' variant='contained' fullWidth sx={{padding:2,borderRadius:3}} onClick={ onFacebookLogin }>
-                  <Facebook/>
-                  <Typography sx={{ml:1}} >Facebook</Typography>
-                </Button>
-              </Grid>
-
-            </Grid>
-
-            <Grid container direction='row' justifyContent='flex-end'>
-                  <Link sx={{textDecoration:'none',color:'blue'}} component={ RouterLink } color='inherit' to='/auth/register' >
-                      Crear una Cuenta
+                <Grid>
+                  <Button type='submit' variant='contained' fullWidth sx={{padding:2,borderRadius:3}} onClick={ onGoogleLogin }>
+                    <Google/>
+                    <Typography sx={{ml:1}} >Google</Typography>
+                  </Button>
+                </Grid>
+              </Grid>  
+              <Grid container direction='row' justifyContent='flex-end'>
+                  <Link sx={{textDecoration:'none',color:'blue'}} component={ RouterLink } to='/auth/register' >
+                    <Button variant='text' sx={{mt:2}}>Crear cuenta</Button>
                   </Link>
+              </Grid>
             </Grid>
 
         </Grid>

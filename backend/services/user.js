@@ -53,4 +53,19 @@ export class User{
             throw new Error('Unexpected error');
         }
     }
+
+    async getUserbyId( id ){
+        try{
+            const user = await this.collection.findById(id, 'email displayName');
+            if(!user){
+                return false;
+            }else{
+                return user; 
+            }
+
+        }catch(error){
+            console.log(error);
+            throw new Error('Unexpected error');
+        }
+    }
 }

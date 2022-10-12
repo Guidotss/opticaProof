@@ -1,29 +1,51 @@
 /* eslint-disable no-undef */
 import jwt from 'jsonwebtoken';
-import User from '../../models/userModel.js';
-
+import { User  } from '../../services/user';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const isAuth = async(req, res, next) => {
-    
-    const auth = req.get('Authorization');
-    let token = '';
-    if(auth && auth.toLowerCase().startsWith('bearer ')){
-        token = auth.substring(7);
-    }
-    if(!token){
-        return res.status(401).json({error: 'Token missing or invalid'});
-    }
-    const decodedToken = jwt.verify(token, `${process.env.JSON_WEB_TOKEN_SECRET}`);
-    if(!decodedToken.id){
-        return res.status(401).json({error: 'Token missing or invalid'});
-    }
 
-    const user = await User.findById(decodedToken.id);
-    
-    if(!user){
-        return res.status(401).json({error: 'Token missing or invalid'});
-    }else if(user.isAdmin === false){
-        return res.status(401).json({error: 'Unauthorized'});
+    const user = new User();
+
+    const token = req.header('x-token');
+
+    if(!token) {
+
+        return res.status(401).json({
+            ok: false,
+            msg: 'does not exist token in the request'
+        });
+
+    }else{
+        try {
+
+            const decodedToken = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRET);
+            const { id,name,providerId } = decodedToken; 
+
+            if(providerId === 'firebase'){
+                req.uid = id;
+                req.name = name;
+                req.providerId = providerId;
+                console.log(providerId);
+                next();
+            }else{
+
+                const userFound = await user.getUserbyId(id);
+                if(!userFound){
+                    return res.status(401).json({
+                        ok: false,
+                        message: 'Token is missing or invalid'
+                    }); 
+                }
+            }
+            
+        } catch (error) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'Token is not valid'
+            });
+        }
     }
 
     next();

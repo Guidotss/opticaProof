@@ -1,16 +1,21 @@
 import { Router } from 'express'; 
-import passport from 'passport';
 import { check } from 'express-validator';
-import { login,registerUser } from '../../controllers/authController';
+import { login,registerUser, renewToken,googleLogin } from '../../controllers/authController';
 import { validateErrors } from '../../auth/middlewares/validate-errors';
+import { isAuth } from '../middlewares/isAuth';
 
 const router = Router();
 
-router.get('/login/facebook', passport.authenticate('facebook'));
-router.get('/login/facebook/callback', passport.authenticate('facebook',{
-    failureRedirect: '/login',
-    session: false,
-})); 
+
+router.get('/renew',isAuth,renewToken);
+router.post(
+    '/login/google',
+    [
+        check('id_token','El token es obligatorio').not().isEmpty(),
+    ],
+    validateErrors,
+    googleLogin
+)
 
 router.post(
     '/register',

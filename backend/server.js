@@ -8,7 +8,6 @@ import cors from 'cors';
 import glassesRoutes from './routes/glasses.routes.js';
 import authRoutes from './auth/routes/auth.routes.js';
 import './dataBase/connect.js';
-import './auth/passport/facebookStrategy.js';
 dotenv.config();
 const app = express();
 
