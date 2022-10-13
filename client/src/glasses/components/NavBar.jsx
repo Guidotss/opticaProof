@@ -23,29 +23,29 @@ export const NavBar = () => {
             />
          </Box>
 
-        <Box sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+        <Box className='links' sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
           <NavLink 
             to='/inicio'
-          className={({isActive}) => isActive ? 'nav-link-active' : ''}
+          className={({isActive}) => isActive ? 'active' : ''}
           
           >
             Inicio
           </NavLink>
           <NavLink 
             to='/lentesdesol'
-            className={({isActive}) => isActive ? 'nav-link-active' : ''}
+            className={({isActive}) => isActive ? 'active' : ''}
             >
             Lentes de sol
           </NavLink>
           <NavLink 
             to='/contactologia'
-            className={({isActive}) => isActive ? 'nav-link-active' : ''}
+            className={({isActive}) => isActive ? 'active' : ''}
             >
             Contactologia
           </NavLink>
           <NavLink 
             to='/contacto'
-            className={({isActive}) => isActive ? 'nav-link-active' : ''}
+            className={({isActive}) => isActive ? 'active' : ''}
             >
             Contacto
           </NavLink>

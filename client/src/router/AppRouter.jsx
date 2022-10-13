@@ -21,6 +21,7 @@ export const AppRouter = () => {
     <Routes>
       <Route path='/auth/*' element={<AuthRoutes/>}/>
       <Route path='/*' element={<GlassesRoutes/>}/>
+      <Route path='/' element={<Navigate to='/inicio'/>}/>
     </Routes>
   )
 }

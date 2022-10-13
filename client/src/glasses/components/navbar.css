@@ -1,9 +1,31 @@
 a{
-    font-size: 22px;
-    color: black;
+    letter-spacing: 2px;
     text-decoration: none;
+    font-size: 25px;
+    position: relative;
     margin-left: 30px;
+    color: black;
 }
-.nav-link-active{
-    color: #ff0000;
+
+.active{
+    color: gray;
 }
+
+.links a:after{
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: black;
+    transform-origin: right;
+    transform: scaleX(0); 
+    transition:transform 0.5s ease-in-out;
+}
+.links a:hover:after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
