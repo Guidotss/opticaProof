@@ -15,10 +15,10 @@ export const NavBar = () => {
 
   return (
     <AppBar xs={12} sm={12} position="static">
-      <Toolbar sx={{display:'flex' ,justifyContent:'space-between', backgroundColor:'white', padding:'30px'}}>
-         <Box sx={{alignItems:'center', justifyContent:'center'}} >
+      <Toolbar sx={{display:'flex' ,justifyContent:'space-between', backgroundColor:'white', padding:'10px'}}>
+         <Box sx={{alignItems:'center', justifyContent:'center', margin:'-90px'}} >
             <img 
-              style={{height:'70px', borderRadius:'20px', marginTop:'-20px', marginLeft:'-20px'}} 
+              style={{height:'300px', borderRadius:'20px', marginTop:'-20px', marginLeft:'-20px'}} 
               src=".../../../../../assets/Logo.png" alt="Logo.jpeg" 
             />
          </Box>
