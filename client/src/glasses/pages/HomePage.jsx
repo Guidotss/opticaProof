@@ -1,16 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { GlassesLayOut } from '../layout/GlassesLayOut'; 
 import 'animate.css'
+import './homePage.css'
 
 export const HomePage = () => {
+
+  const navigate = useNavigate();
+
+  const navigateToSunGlasses = () => {
+    navigate('/lentesdesol');
+  }
+
   return (
     <GlassesLayOut>
       <Grid sx={{display:'flex', flexDirection:'row',justifyContent:'space-between'}}>
-      <Box xs={6} sx={{backgroundColor:'black', height:585}}>
-          <Box className='animate__animated animate__fadeInDown' sx={{alignItems:'center', justyContent:'center',textAlign:'center', marginTop:15}}>
-            <Typography variant="h3" sx={{color:'white', fontWeight:'bold', textAlign:'center', marginTop:2}}>Welcome to Glasses Store</Typography>
-            <Typography variant="h5" sx={{color:'white', fontWeight:'bold', textAlign:'center', marginTop:2}}>We have the best glasses in the world</Typography>
-            <Button 
+      <Box className='homeTextContainer' xs={6} sx={{height:585}}>
+          <Box sx={{alignItems:'center', justyContent:'center',textAlign:'center', marginTop:5}}>
+            <Typography className='animate__animated animate__fadeIn animate__slower' variant='h3' sx={{color:'black',fontSize:70, fontWeight:'bold'}}>Bienvenido</Typography>
+            <Typography className='animate__animated animate__fadeIn animate__delay-1s' variant="h5" sx={{color:'black', fontWeight:'bold',fontSize:40, textAlign:'center', marginTop:5}}>Tenemos el modelo que necesitas</Typography>
+            <Button className='animate__animated animate__fadeIn animate__delay-1s'
+              onClick={ navigateToSunGlasses }
               variant="contained"
               sx={{
                 
@@ -18,14 +28,14 @@ export const HomePage = () => {
                 backgroundColor:'black', 
                 marginTop:10, 
                 marginBottom:2, 
-                width:200, 
-                height:50, 
+                width:250, 
+                height:70, 
                 fontWeight:'bold', 
-                fontSize:20, 
-                borderRadius:10, 
-                border:'2px solid', '&:hover': {backgroundColor: 'white', color:'black'}}}
-
-              >Shop Now
+                fontSize:20,  
+                boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
+                border:'1px black solid', '&:hover': {backgroundColor: 'white', color:'black'}}}
+                
+              >Lentes de sol
             </Button>
           </Box>
         </Box>

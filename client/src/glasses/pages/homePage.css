@@ -1,0 +1,15 @@
+.homeTextContainer{
+    padding: 100px;
+    background: #FFAFBD;
+    background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);
+    background: linear-gradient(to right, #ffc3a0, #FFAFBD);
+}
+.homeTextContainer h3{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.homeTextContainer h5{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.homeTextContainer button{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
