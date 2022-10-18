@@ -5,14 +5,15 @@ import { GlassesRoutes } from '../glasses/routes/GlassesRoutes'
 import { useAuthStore } from '../hooks';
 import { CheckingAuth } from '../ui'
 
-
 export const AppRouter = () => {
 
-  const { status, checkAuthToken } = useAuthStore(); 
+  const { status,checkAuthToken } = useAuthStore(); 
 
   useEffect(() => {
     checkAuthToken();
-  },[]);
+  },[])
+
+
 
   if(status === 'authenticating') return <CheckingAuth />
   
@@ -21,7 +22,7 @@ export const AppRouter = () => {
     <Routes>
       <Route path='/auth/*' element={<AuthRoutes/>}/>
       <Route path='/*' element={<GlassesRoutes/>}/>
-      <Route path='/' element={<Navigate to='/inicio'/>}/>
+      <Route path='*' element={<Navigate to='/'/>}/>
     </Routes>
   )
 }

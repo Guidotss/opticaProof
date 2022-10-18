@@ -16,10 +16,9 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
   const { email, password,onInputChange,onResetForm } = useForm( formFields );
-  const { startLogin,errorMessage,startLoginWithGoogle } = useAuthStore();
+  const { startLogin,errorMessage,status,startLoginWithGoogle } = useAuthStore();
 
   const onSubmit = (e) => {
-
     e.preventDefault(); 
     startLogin({email, password}); 
   }
@@ -28,11 +27,15 @@ export const LoginPage = () => {
     startLoginWithGoogle();
   }
 
-  useEffect(() => {
+   useEffect(() => {
+    if (status === 'authenticated'){
+      navigate('/');
+    }
     if(errorMessage !== undefined){
       Swal.fire('Error en la autenticación',errorMessage,'error');
     }
-  },[errorMessage])
+
+  },[errorMessage]) 
 
   return (
     <AuthLayOut title='Login'>

@@ -15,6 +15,7 @@ export const useAuthStore = () => {
 
         try{
             const { data } = await opticaApi.post('/auth/login', { email, password });
+            console.log(data);
             if(data.ok){
                 const {name, email, isAdmin, uid, token} = data; 
                 localStorage.setItem('token',token);
@@ -58,8 +59,9 @@ export const useAuthStore = () => {
 
     const checkAuthToken = async() => {
         const token = localStorage.getItem('token');
-        console.log(token);
+        
         if(!token){
+            console.log('No hay token');
             dispatch(logOut());
         }
 
@@ -68,7 +70,6 @@ export const useAuthStore = () => {
             const { data } = await opticaApi.get('/auth/renew');
             if(data.ok){
 
-                console.log({data});
                 localStorage.setItem('token',data.token);
                 localStorage.setItem('token-init-date', new Date().getTime());
                 dispatch(login({ displayName:data.name, email:data.email, isAdmin:data.isAdmin, uId:data.uid }));
@@ -77,6 +78,7 @@ export const useAuthStore = () => {
 
 
         }catch(error){
+            console.log(error);
             localStorage.clear();
             dispatch(logOut());
         }
@@ -115,6 +117,7 @@ export const useAuthStore = () => {
     return{ 
         status,
         errorMessage,
+        isAdmin: user.isAdmin,
         
         startLogin,
         startRegister,

@@ -1,24 +1,27 @@
+import { useMemo } from 'react';
 import { NavLink, NavLink as RouterLink } from 'react-router-dom';
 import { AppBar, IconButton, MenuItem, Toolbar, Typography, Button,Box, Link } from '@mui/material';
 import { Store } from '@mui/icons-material'
 import { useAuthStore } from '../../hooks'
+import { AccountMenu } from '../../ui'
 import './navbar.css'
 
 
 export const NavBar = () => {
 
-  const { status,startLogout } = useAuthStore();
+  const { status,isAdmin,startLogout } = useAuthStore();
+  
 
   const onLogout = () => {
     startLogout();
   }
 
   return (
-    <AppBar xs={12} sm={12} position="static">
-      <Toolbar sx={{display:'flex' ,justifyContent:'space-between', backgroundColor:'white', padding:'10px'}}>
+    <AppBar xs={12} sm={12} position="relative">
+      <Toolbar sx={{display:'flex' ,justifyContent:'space-between', backgroundColor:'white', padding:'10px', width:'100vw'}}>
          <Box sx={{alignItems:'center', justifyContent:'center', margin:'-90px'}} >
             <img 
-              style={{height:'300px', borderRadius:'20px', marginTop:'-20px', marginLeft:'-20px'}} 
+              style={{height:'280px', borderRadius:'20px', marginTop:'-10px', marginLeft:'-5px', marginBottom:10}} 
               src=".../../../../../assets/Logo.png" alt="Logo.jpeg" 
             />
          </Box>
@@ -52,15 +55,22 @@ export const NavBar = () => {
 
         </Box>
 
-        {
-          status === 'authenticated'
-          ? <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none" onClick={ onLogout }>
-              LogOut
-            </Button>
-          : <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none">
-              LogIn
-            </Button>
-        }
+        <Box sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+            {
+              (status === 'authenticated')
+              ?  <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none" onClick={ onLogout }>
+                  Logout
+                </Button>
+              : <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none">
+                  LogIn
+                </Button>
+            }
+            {
+              (status === 'authenticated' && isAdmin)
+              ? <AccountMenu/>
+              : null
+            }
+        </Box>
       </Toolbar>
       
   </AppBar>

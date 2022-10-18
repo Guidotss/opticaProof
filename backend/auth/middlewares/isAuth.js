@@ -21,11 +21,12 @@ export const isAuth = async(req, res, next) => {
         try {
 
             const decodedToken = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRET);
-            const { id,name,providerId } = decodedToken; 
+            const { id,name,isAdmin,providerId } = decodedToken; 
 
+            req.isAdmin = isAdmin;
+            req.uid = id;
+            req.name = name;
             if(providerId === 'firebase'){
-                req.uid = id;
-                req.name = name;
                 req.providerId = providerId;
                 console.log(providerId);
                 next();

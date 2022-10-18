@@ -6,6 +6,7 @@ import './homePage.css'
 
 export const HomePage = () => {
 
+  
   const navigate = useNavigate();
 
   const navigateToSunGlasses = () => {
@@ -15,7 +16,7 @@ export const HomePage = () => {
   return (
     <GlassesLayOut>
       <Grid sx={{display:'flex', flexDirection:'row',justifyContent:'space-between'}}>
-      <Box className='homeTextContainer' xs={6} sx={{height:585}}>
+      <Box className='homeTextContainer' xs={6} sx={{height:'87vh'}}>
           <Box sx={{alignItems:'center', justyContent:'center',textAlign:'center', marginTop:5}}>
             <Typography className='animate__animated animate__fadeIn animate__slower' variant='h3' sx={{color:'black',fontSize:70, fontWeight:'bold'}}>Bienvenido</Typography>
             <Typography className='animate__animated animate__fadeIn animate__delay-1s' variant="h5" sx={{color:'black', fontWeight:'bold',fontSize:40, textAlign:'center', marginTop:5}}>Tenemos el modelo que necesitas</Typography>
@@ -40,7 +41,7 @@ export const HomePage = () => {
           </Box>
         </Box>
         <Box  xs={6}>
-          <img src="../../../assets/rayban.jpeg" alt="rayban.jpeg" style={{height:585, width:'100%'}}  />
+          <img src="../../../assets/rayban.jpeg" alt="rayban.jpeg" style={{height:'87vh', width:'72.6vw'}}  />
         </Box>
       </Grid>
     </GlassesLayOut>
