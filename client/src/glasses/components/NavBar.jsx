@@ -3,7 +3,7 @@ import { NavLink, NavLink as RouterLink } from 'react-router-dom';
 import { AppBar, IconButton, MenuItem, Toolbar, Typography, Button,Box, Link } from '@mui/material';
 import { Store } from '@mui/icons-material'
 import { useAuthStore } from '../../hooks'
-import { AccountMenu } from '../../ui'
+import { AdminComponent } from '../../ui'
 import './navbar.css'
 
 
@@ -11,7 +11,6 @@ export const NavBar = () => {
 
   const { status,isAdmin,startLogout } = useAuthStore();
   
-
   const onLogout = () => {
     startLogout();
   }
@@ -28,26 +27,26 @@ export const NavBar = () => {
 
         <Box className='links' sx={{display:'flex', alignItems:'center', justifyContent:'center'}}>
           <NavLink 
-            to='/inicio'
+            to='/optica/inicio'
           className={({isActive}) => isActive ? 'active' : ''}
           
           >
             Inicio
           </NavLink>
           <NavLink 
-            to='/lentesdesol'
+            to='/optica/lentesdesol'
             className={({isActive}) => isActive ? 'active' : ''}
             >
             Lentes de sol
           </NavLink>
           <NavLink 
-            to='/contactologia'
+            to='/optica/contactologia'
             className={({isActive}) => isActive ? 'active' : ''}
             >
             Contactologia
           </NavLink>
           <NavLink 
-            to='/contacto'
+            to='/optica/contacto'
             className={({isActive}) => isActive ? 'active' : ''}
             >
             Contacto
@@ -67,7 +66,7 @@ export const NavBar = () => {
             }
             {
               (status === 'authenticated' && isAdmin)
-              ? <AccountMenu/>
+              ? <AdminComponent/>
               : null
             }
         </Box>

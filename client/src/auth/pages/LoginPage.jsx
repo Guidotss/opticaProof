@@ -29,7 +29,7 @@ export const LoginPage = () => {
 
    useEffect(() => {
     if (status === 'authenticated'){
-      navigate('/');
+      navigate('/optica');
     }
     if(errorMessage !== undefined){
       Swal.fire('Error en la autenticación',errorMessage,'error');

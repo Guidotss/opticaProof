@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import {Box,Avatar,Menu,MenuItem,ListItemIcon,Divider,IconButton,Typography, Tooltip } from '@mui/material';
+import {Box,Avatar,Menu,MenuItem,Divider,IconButton,Typography, Tooltip} from '@mui/material';
 import { Settings,LibraryAdd, ModeEdit,Delete,GridOn } from '@mui/icons-material';
+import { AdminLink } from './AdminLink';
 
-export const AccountMenu = () =>{
+export const AdminComponent = () =>{
 
   const [anchorEl, setAnchorEl] = useState(false);
 
@@ -65,22 +66,22 @@ export const AccountMenu = () =>{
         >
             <MenuItem>
               <GridOn/>
-              <Typography sx={{marginLeft:2}}>Todos los anteojos</Typography>
+                <AdminLink route='todoslosanteojos'title='Todos los anteojos'/>
             </MenuItem>
             <Divider/>
             <MenuItem>
                 <LibraryAdd/>
-                <Typography sx={{marginLeft:2}}>Agregar anteojo</Typography>
+                <AdminLink route='agregaranteojos' title='Agregar anteojos'/>
             </MenuItem>
             <Divider/>
             <MenuItem>
                 <ModeEdit/>
-                <Typography sx={{marginLeft:2}}>Editar anteojo</Typography>
+                <AdminLink route='editaranteojos' title='Editar anteojos'/>
             </MenuItem>
             <Divider/>
             <MenuItem>
                 <Delete/>
-                <Typography sx={{marginLeft:2}}>Eliminar anteojo</Typography>
+                <AdminLink route='eliminaranteojos' title='Eliminar anteojos'/>
             </MenuItem>
         </Menu>
     </>

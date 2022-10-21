@@ -1,28 +1,32 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom'; 
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
-import { GlassesRoutes } from '../glasses/routes/GlassesRoutes'
+import { NotFoundPage } from '../error/page/NotFoundPage';
+import { GlassesRoutes } from '../glasses/routes'
+import { AdminRoutes } from '../glasses/admin/routes/AdminRoutes'
 import { useAuthStore } from '../hooks';
 import { CheckingAuth } from '../ui'
 
+
 export const AppRouter = () => {
 
-  const { status,checkAuthToken } = useAuthStore(); 
+  const { status,checkAuthToken,checkAdminCredentials,isAdmin } = useAuthStore(); 
 
   useEffect(() => {
     checkAuthToken();
-  },[])
+  },[]);
 
-
-
-  if(status === 'authenticating') return <CheckingAuth />
   
+  if(status === 'authenticating') return <CheckingAuth />
   
   return (
     <Routes>
-      <Route path='/auth/*' element={<AuthRoutes/>}/>
-      <Route path='/*' element={<GlassesRoutes/>}/>
-      <Route path='*' element={<Navigate to='/'/>}/>
+        <Route path='/optica/*' element={<GlassesRoutes/>}/>
+        <Route path='/auth/*' element={<AuthRoutes/>}/>
+        {
+          (status === 'authenticated' && isAdmin) && <Route path='/admin/*' element={<AdminRoutes/>}/>
+        }
+        <Route path='/*' element={<NotFoundPage/>}/>
     </Routes>
   )
 }

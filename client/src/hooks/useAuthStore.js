@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { useDispatch, useSelector } from "react-redux"
 import { opticaApi } from '../api'
 import { loginWithGoogle } from "../auth/firebase/Provider";
@@ -113,6 +114,29 @@ export const useAuthStore = () => {
         }
     }
 
+    const checkAdminCredentials = async() => {
+        //dispatch (checkingCredentials());
+
+        const token = localStorage.getItem('token');
+        if(!token){
+            return dispatch(logOut());
+        }
+
+        try{
+            const { data } = await opticaApi.get('/auth/renew');
+            if(data.ok){
+                console.log({data});
+                localStorage.setItem('token',data.token);
+                localStorage.setItem('token-init-date', new Date().getTime());
+                
+            }
+
+        }catch(error){
+            console.log(error);
+            return dispatch(logOut({errorMessage:error.message}));
+        }
+    }
+
 
     return{ 
         status,
@@ -123,7 +147,8 @@ export const useAuthStore = () => {
         startRegister,
         startLogout,
         startLoginWithGoogle,
-        checkAuthToken
+        checkAuthToken,
+        checkAdminCredentials
     }
 
 }
