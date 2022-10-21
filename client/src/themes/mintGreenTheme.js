@@ -9,7 +9,7 @@ export const mintGreenTheme = createTheme({
             main: '#d6dfc2'
         },
         background: {
-            default: '#989e8f'
+            default: '#e6eee3'
         }
     }
 
