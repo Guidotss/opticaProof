@@ -10,7 +10,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const navigateToSunGlasses = () => {
-    navigate('/lentesdesol');
+    navigate('/optica/lentesdesol');
   }
 
   return (
