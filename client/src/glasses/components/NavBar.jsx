@@ -43,7 +43,7 @@ export const NavBar = () => {
             to='/optica/contactologia'
             className={({isActive}) => isActive ? 'active' : ''}
             >
-            Contactologia
+            Armazones
           </NavLink>
           <NavLink 
             to='/optica/contacto'
@@ -58,7 +58,7 @@ export const NavBar = () => {
             {
               (status === 'authenticated')
               ?  <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none" onClick={ onLogout }>
-                  Logout
+                  Cerrar sesión
                 </Button>
               : <Button sx={{fontSize:22}} component={ RouterLink } to='/auth/login' color="inherit" underline="none">
                   LogIn
