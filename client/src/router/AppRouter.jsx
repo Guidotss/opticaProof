@@ -11,12 +11,11 @@ import { CheckingAuth } from '../ui'
 export const AppRouter = () => {
 
   const { status,checkAuthToken,checkAdminCredentials,isAdmin } = useAuthStore(); 
-
   useEffect(() => {
     checkAuthToken();
   },[]);
 
-  
+
   if(status === 'authenticating') return <CheckingAuth />
   
   return (

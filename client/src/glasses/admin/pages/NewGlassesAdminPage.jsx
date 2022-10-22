@@ -1,5 +1,5 @@
-import { Box,Divider,Grid,IconButton,TextField,Button } from '@mui/material';
-import { AddPhotoAlternate } from '@mui/icons-material';
+import { Box,Divider,Grid,IconButton,TextField,Button, Typography } from '@mui/material';
+import { AddPhotoAlternate,Save } from '@mui/icons-material';
 import { AdminGlassesLayOut } from '../../layout/AdminGlassesLayOut';
 
 
@@ -13,10 +13,24 @@ export const NewGlassesAdminPage = () => {
         </h1>
       </Box>
 
-      <Grid container spacing={2} xs={12} sx={{padding:2, border:'1px solid',boxShadow:4, marginTop:'50px', width:'50vw',height:'70vh', marginLeft:'600px', borderRadius:'15px'}} direction="column" alignItems="center" justifyContent="center">
+      <Grid container 
+        spacing={2} 
+        sx={{
+              padding:2, 
+              border:'1px solid',
+              boxShadow:4, marginTop:'50px', 
+              width:'50vw',
+              height:'70vh', 
+              marginLeft:'600px', 
+              borderRadius:'15px', 
+              backgroundColor:'#f6fceb'
+            }}
+        direction="column" 
+        alignItems="center" 
+        justifyContent="center"
+      >
         <Grid item sx={{textAlign:'center'}}>
           <form>
-
             <Grid container spacing={2} sx={{padding:2}} direction="column" alignItems="center" justifyContent="center">
               <Grid item sx={{textAlign:'center'}}>
                 <TextField
@@ -50,17 +64,42 @@ export const NewGlassesAdminPage = () => {
                   multiple
                   type="file"
                 />
+
                 <label htmlFor="raised-button-file">
-                  <Box sx={{width:'500px', height:'100px', border:'solid 1px gray',boxShadow:2,backgroundColor:'#334746', borderRadius:'10px'}}>
+                  <Box sx={{width:'500px', height:'100px', border:'solid 1px gray',boxShadow:2,backgroundColor:'#14213d', borderRadius:'10px', marginTop:'20px'}}>
                     <IconButton component="span">
-                      <AddPhotoAlternate sx={{fontSize:'100px', marginTop:'-10px'}}/>
+                      <AddPhotoAlternate sx={{fontSize:'100px', marginTop:'-10px', color:'white'}}/>
+                      <Typography sx={{color:'white', fontSize:'20px',fontWeight:'bold', marginTop:'-10px', marginLeft:'-10px'}}>Agregar imagen</Typography>
                     </IconButton>
                   </Box>
                 </label>
+
               </Grid>
             </Grid>
+
             <Divider/>
-            <Button type='submit' variant='contained' fullWidth sx={{padding:2, borderRadius:3, fontWeight:'bold',fontSize:'15px', marginTop:'10px' }}>Guardar</Button>
+            <Box sx={{textAlign:'center', marginTop:'20px'}}>
+              <IconButton
+                type='submit' 
+                variant='contained'
+                sx={{
+                  width:'500px',
+                  height:'50px',
+                  borderRadius:'10px', 
+                  backgroundColor:'#14213d', 
+                  color:'white', 
+                  fontWeight:'bold', 
+                  fontSize:'20px',
+                  '&:hover': {
+                    backgroundColor: '#14213d',
+                    opacity: [0.9, 0.8, 0.7],
+                  },
+                }}
+                >
+                  <Save sx={{fontSize:'30px', marginRight:'10px'}}/>
+                <Typography sx={{fontSize:'20px', fontWeight:'bold'}}>Guardar</Typography>
+              </IconButton>
+            </Box>
           </form>
         </Grid>
       </Grid>
