@@ -26,6 +26,7 @@ export const AppRouter = () => {
         {
           (status === 'authenticated' && isAdmin) && <Route path='/admin/*' element={<AdminRoutes/>}/>
         }
+        <Route path='/' element={<Navigate to='/optica'/>}/>
         <Route path='/*' element={<NotFoundPage/>}/>
     </Routes>
   )

@@ -20,7 +20,9 @@ export const SideBar = () => {
         <Drawer variant='permanent' open sx={{display:{xs:'block'},'& .MuiDrawer-paper':{boxSizing:'border-box',width:'300px', backgroundColor:'#EFE4CF', boxShadow:'0 0 0 1px gray'}}}>
             <Toolbar  component='div'>
                 <Grid>
-                    <AdminPanelSettings sx={{fontSize:50}}/>
+                    <IconButton onClick={() => navigateButton('todoslosanteojos')} sx={{color:'black'}}>
+                        <AdminPanelSettings sx={{fontSize:50}}/>
+                    </IconButton>
                 </Grid>
                 <Grid>
                     <h1>Admin Panel</h1>

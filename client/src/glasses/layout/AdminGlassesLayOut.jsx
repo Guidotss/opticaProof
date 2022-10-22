@@ -8,7 +8,7 @@ export const AdminGlassesLayOut = ({ children }) => {
         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <SideBar/>
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{textAlign:'center'}}>
+        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} sx={{textAlign:'center', justifyContent:'center'}}>
             { children }
         </Grid>
     </Grid>
