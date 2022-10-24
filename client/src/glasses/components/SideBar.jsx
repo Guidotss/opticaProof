@@ -18,14 +18,23 @@ export const SideBar = () => {
 
     <Box componet='nav' sx={{width:'200px', flexShrink:{sm:0}}}>
         <Drawer variant='permanent' open sx={{display:{xs:'block'},'& .MuiDrawer-paper':{boxSizing:'border-box',width:'300px', backgroundColor:'#EFE4CF', boxShadow:'0 0 0 1px gray'}}}>
-            <Toolbar  component='div'>
+            <Toolbar  component='div' sx={{marginTop:'20px', marginBottom:'10px'}}>
                 <Grid>
                     <IconButton onClick={() => navigateButton('todoslosanteojos')} sx={{color:'black'}}>
                         <AdminPanelSettings sx={{fontSize:50}}/>
                     </IconButton>
                 </Grid>
                 <Grid>
-                    <h1>Admin Panel</h1>
+                    <Typography 
+                        sx={{
+                            color:'black', 
+                            fontSize:20, 
+                            fontWeight:'bold', 
+                            marginLeft:'10px'
+                        }}
+                    >
+                    Panel de control
+                </Typography>
                 </Grid>
             </Toolbar>
             <Divider/>

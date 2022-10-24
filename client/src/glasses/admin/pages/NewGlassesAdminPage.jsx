@@ -1,14 +1,31 @@
 import { Box,Divider,Grid,IconButton,TextField,Button, Typography } from '@mui/material';
 import { AddPhotoAlternate,Save } from '@mui/icons-material';
 import { AdminGlassesLayOut } from '../../layout/AdminGlassesLayOut';
+import { useForm } from '../../../hooks';
 
+
+const formFields = {
+  name:'',
+  brand:'',
+  description:'',
+  file:'',
+}; 
 
 export const NewGlassesAdminPage = () => {
+
+  const { name,description,file,brand,onInputChange,onResetForm } = useForm( formFields );
+
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log({name,description,file,brand});
+  }
+
   return (
     <AdminGlassesLayOut>
 
       <Box sm={12} sx={{width:'100vw', border:'solid 1px gray',boxShadow:2,backgroundColor:'#14213d'}}>
-        <h1 style={{color:'white', letterSpacing:5, fontWeight:'bold', marginBottom:'40px',marginLeft:'250px', marginTop:'50px'}} >
+        <h1 style={{color:'white', letterSpacing:5, fontWeight:'bold',marginLeft:'250px', marginTop:'28px'}} >
           Agregar anteojos
         </h1>
       </Box>
@@ -16,47 +33,61 @@ export const NewGlassesAdminPage = () => {
       <Grid container 
         spacing={2} 
         sx={{
-              padding:2, 
               border:'1px solid',
-              boxShadow:4, marginTop:'5vh', 
-              width:'50vw',
-              height:'70vh', 
-              marginLeft:'35vw', 
+              boxShadow:4, 
+              marginTop:'3vh', 
+              width:'43vw',
+              height:'82vh', 
+              marginLeft:'37vw', 
               borderRadius:'15px', 
-              backgroundColor:'#f6fceb'
+              backgroundColor:'#f6fceb',
             }}
         direction="column" 
         alignItems="center" 
         justifyContent="center"
       >
         <Grid item sx={{textAlign:'center'}}>
-          <form>
+          <form style={{padding:20}} onSubmit={ onSubmit }>
             <Grid  container spacing={2} sx={{padding:2}} direction="column" alignItems="center" justifyContent="center">
+
               <Grid item xs={12} sx={{textAlign:'center'}}>
                 <TextField
+                  xs={12}
+                  name='name'
                   label="Nombre del anteojo"
                   variant="outlined"
                   color="success"
                   sx={{width:'500px','@media (max-width: 600px)':{width:'300px'}}}
+                  onChange={ onInputChange }
+                  value={name}
                 />
               </Grid>
-
-              <Grid item xs={12} sx={{textAlign:'center'}}>
-                <TextField
-                  label="Modelo"
-                  variant="outlined"
-                  color="success"
-                  sx={{width:'500px'}}
-                />
-              </Grid>  
 
               <Grid item  sx={{textAlign:'center'}}>
                 <TextField
                   xs={12}
+                  name='brand'
                   label="Marca"
                   variant="outlined"
                   color="success"
                   sx={{width:'500px'}}
+                  onChange={ onInputChange }
+                  value={brand}
+                />
+              </Grid>
+
+              <Grid item  sx={{textAlign:'center'}}>
+                <TextField
+                  xs={12}
+                  name='description'
+                  label="Descripción"
+                  variant="outlined"
+                  color="success"
+                  multiline
+                  rows={4}
+                  sx={{width:'500px'}}
+                  onChange={ onInputChange }
+                  value={description}
                 />
               </Grid>
 
@@ -67,6 +98,9 @@ export const NewGlassesAdminPage = () => {
                   id="raised-button-file"
                   multiple
                   type="file"
+                  name='file'
+                  onChange={ onInputChange }
+                  value={file}
                 />
 
                 <label htmlFor="raised-button-file">
