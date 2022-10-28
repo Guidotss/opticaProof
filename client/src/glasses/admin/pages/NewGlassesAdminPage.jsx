@@ -1,7 +1,7 @@
 import { Box,Divider,Grid,IconButton,TextField,Button, Typography } from '@mui/material';
 import { AddPhotoAlternate,Save } from '@mui/icons-material';
 import { AdminGlassesLayOut } from '../../layout/AdminGlassesLayOut';
-import { useForm } from '../../../hooks';
+import { useAdminGlasses, useForm } from '../../../hooks';
 
 
 const formFields = {
@@ -14,11 +14,15 @@ const formFields = {
 export const NewGlassesAdminPage = () => {
 
   const { name,description,file,brand,onInputChange,onResetForm } = useForm( formFields );
-
+  const { startUploadingFile } = useAdminGlasses();
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log({name,description,file,brand});
+  }
+
+  const inFileChange = ({ target }) => {
+      startUploadingFile(target.files[0]);
   }
 
   return (
@@ -99,7 +103,7 @@ export const NewGlassesAdminPage = () => {
                   multiple
                   type="file"
                   name='file'
-                  onChange={ onInputChange }
+                  onChange={ inFileChange }
                   value={file}
                 />
 
