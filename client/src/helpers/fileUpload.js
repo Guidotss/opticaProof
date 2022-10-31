@@ -7,28 +7,19 @@ export const fileUpload = async (file={}) => {
 
     if(!file) throw new Error('No file selected');
 
-    const { CLOUDINARY_URL } = getEnvVariables();
+    const { VITE_CLOUDINARY_URL } = getEnvVariables();
 
     const formData = new FormData();
     formData.append('upload_preset', 'opticaProof');
     formData.append('file', file);
-    
+
     try {
 
-        console.log(formData); 
-        const resp  = await fetch(CLOUDINARY_URL, {
-            method: 'POST',
-            body: formData
-        })
-        console.log(resp);
+        const resp  = await axios.post(VITE_CLOUDINARY_URL, formData);
 
-        
         if(!resp.ok) throw new Error('Error uploading file');
 
         return resp.secure_url;
-
-        
-
 
     }catch(error){
         console.log(error);
