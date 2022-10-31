@@ -7,9 +7,9 @@ export const useAdminGlasses = () => {
     const dispatch = useDispatch();
     const {status, glasses, errorMessage} = useSelector( (state) => state.glasses );
 
-    const startUploadingFile = async ( file ) => {
+    const startUploadingFile = async ( file=[] ) => {
         dispatch( checkingGlasses() );
-        
+                
         try{
             const resp = await fileUpload( file );
             console.log(resp);
