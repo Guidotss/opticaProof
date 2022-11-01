@@ -8,22 +8,20 @@ export const useAdminGlasses = () => {
     const dispatch = useDispatch();
     const {status, glasses, errorMessage} = useSelector( (state) => state.glasses );
 
-    const startUploadingFile = async ( file=[] ) => {
-        dispatch( checkingGlasses() );
-                
+    const startUploadingFile = async ( file=[] ) => {        
         try{
             const resp = await fileUpload( file );
             localStorage.setItem('glassesImage', JSON.stringify(resp));
         }catch(error){
             console.log(error);
-            
         }
     }
 
     const startUploadingGlasses = async ( glasses ) => {
 
+        dispatch( checkingGlasses() );
         const glassesImage = JSON.parse(localStorage.getItem('glassesImage'));
-        if(!glassesImage) return dispatch( errorUplodingGlasses('No image selected') );
+        if(!glassesImage) return dispatch( errorUplodingGlasses({errorMessage:'No image selected'}) );
         
         const newGlasses = {
             ...glasses,
@@ -33,18 +31,17 @@ export const useAdminGlasses = () => {
         const token = localStorage.getItem('token');
         if(!token) return dispatch( errorUplodingGlasses('No token found') );
         
-        try{
-            
+        try{ 
+            console.log(newGlasses);
             const { data } = await opticaApi.post('glasses/createGlasses', newGlasses);
-            dispatch( checkingGlasses() );
-
             if(data.ok){
                 dispatch( uploadGlasses(data.newGlasses) );
+                localStorage.removeItem('glassesImage');
             }
             
         }catch(error){
             console.log(error); 
-            dispatch( errorUplodingGlasses(error.message) );  
+            return dispatch( errorUplodingGlasses({errorMessage:error}) );
         }
     }
     

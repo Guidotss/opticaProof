@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const glassesSlice = createSlice({
     name: 'glasses',
     initialState: {
-        status:'uploading',
+        status:undefined,
         glasses:{},
         errorMessage: undefined
     },
@@ -15,13 +15,14 @@ export const glassesSlice = createSlice({
         checkingGlasses: (state) => {
             state.status = 'checking';
         },
-        
-        clearErrorMessage: (state) => {
-            state.errorMessage = undefined;
-        },
+
         errorUplodingGlasses: (state, { payload }) => {
             state.status = 'error';
+            state.glasses = {};
             state.errorMessage = payload?.errorMessage;
+        },
+        clearErrorMessage: (state) => {
+            state.errorMessage = undefined;
         }
     }
 });

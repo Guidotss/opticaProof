@@ -1,7 +1,9 @@
-import { Box,Divider,Grid,IconButton,TextField,Button, Typography } from '@mui/material';
-import { AddPhotoAlternate,Save } from '@mui/icons-material';
+import { Box,Divider,Grid,IconButton,TextField,Button, Typography,CircularProgress } from '@mui/material';
+import { AddPhotoAlternate,Save,CheckCircle } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 import { AdminGlassesLayOut } from '../../layout/AdminGlassesLayOut';
 import { useAdminGlasses, useForm } from '../../../hooks';
+import { useEffect } from 'react';
 
 
 const formFields = {
@@ -13,7 +15,7 @@ const formFields = {
 export const NewGlassesAdminPage = () => {
 
   const { name,description,file,brand,onInputChange,onResetForm } = useForm( formFields );
-  const { startUploadingFile, startUploadingGlasses } = useAdminGlasses();
+  const { startUploadingFile, startUploadingGlasses, status,errorMessage } = useAdminGlasses();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,9 +23,20 @@ export const NewGlassesAdminPage = () => {
     onResetForm();
   }
 
-  const inFileChange = ({ target }) => {
+  const onFileChange = ({ target }) => {
     startUploadingFile(target.files[0]);
   }
+
+  useEffect(() => {
+
+    if(status === 'uploaded'){
+      Swal.fire('Anteojo creado','El anteojo se ha creado correctamente','success');
+    }
+    if(status === 'error'){
+      Swal.fire('Error',errorMessage,'error');
+    }
+
+  },[status])
 
   return (
     <AdminGlassesLayOut>
@@ -103,8 +116,8 @@ export const NewGlassesAdminPage = () => {
                   multiple
                   type="file"
                   name='file'
-                  onChange={ inFileChange }
-                  value={file}
+                  value={ file }
+                  onChange={ onFileChange }
                 />
 
                 <label htmlFor="raised-button-file">
@@ -125,6 +138,7 @@ export const NewGlassesAdminPage = () => {
                 xs={12}
                 type='submit' 
                 variant='contained'
+                disabled={ status === 'checking' }
                 sx={{
                   width:'500px',
                   height:'50px',
@@ -141,6 +155,10 @@ export const NewGlassesAdminPage = () => {
                 }}
                 >
                   <Save sx={{fontSize:'30px', marginRight:'10px'}}/>
+                  {
+                    (status === 'checking') && <CircularProgress size={20} color="success" />
+                  }
+
                 <Typography xs={12} sx={{fontSize:'20px', fontWeight:'bold'}}>Guardar</Typography>
               </IconButton>
             </Box>
