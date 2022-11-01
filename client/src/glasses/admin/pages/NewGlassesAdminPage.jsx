@@ -8,25 +8,21 @@ const formFields = {
   name:'',
   brand:'',
   description:'',
-  file:'',
 }; 
 
 export const NewGlassesAdminPage = () => {
 
   const { name,description,file,brand,onInputChange,onResetForm } = useForm( formFields );
-  const { startUploadingFile } = useAdminGlasses();
+  const { startUploadingFile, startUploadingGlasses } = useAdminGlasses();
 
   const onSubmit = (e) => {
     e.preventDefault();
-  }
-
-  const onFileChange = ({ target }) => {
-    const file = target.files[0];
-    startUploadingFile(file);
+    startUploadingGlasses({ name,description,brand });
+    onResetForm();
   }
 
   const inFileChange = ({ target }) => {
-      startUploadingFile(target.files[0]);
+    startUploadingFile(target.files[0]);
   }
 
   return (

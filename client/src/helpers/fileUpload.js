@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const fileUpload = async (file={}) => {
 
-    console.log(file)
+    
 
     if(!file) throw new Error('No file selected');
 
@@ -15,11 +15,11 @@ export const fileUpload = async (file={}) => {
 
     try {
 
-        const resp  = await axios.post(VITE_CLOUDINARY_URL, formData);
+        const { data, statusText } = await axios.post(VITE_CLOUDINARY_URL, formData);
+        
+        if(statusText !== 'OK') throw new Error('Error uploading file');
 
-        if(!resp.ok) throw new Error('Error uploading file');
-
-        return resp.secure_url;
+        return data.url;
 
     }catch(error){
         console.log(error);

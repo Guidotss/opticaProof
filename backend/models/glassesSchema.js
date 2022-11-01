@@ -2,7 +2,11 @@ import mongoose from "mongoose";
 
 
 export const glassesSchema = new mongoose.Schema({
-    model: {
+    name: {
+        type: String,
+        required: true,
+    },
+    brand:{
         type: String,
         required: true,
     },
