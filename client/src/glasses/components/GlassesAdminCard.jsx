@@ -1,9 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import { Card, CardActionArea,CardMedia, CardContent, CardActions, Button, Typography } from '@mui/material'; 
 
 
-export const GlassesAdminCard = ({ glasses }) => {
 
-  console.log(glasses);
+
+export const GlassesAdminCard = ({ glasses }) => {
+  
+  const navigate = useNavigate();
+
+  const onCardClick = ( id ) => {
+    navigate(`/admin/glasses/${id}`);
+  }
+
   return (
     <Card 
       sx={{ 
@@ -17,7 +25,7 @@ export const GlassesAdminCard = ({ glasses }) => {
           transition: 'all 0.3s ease-in-out',
         } 
     }}>
-      <CardActionArea sx={{borderRadius:'20px'}}>
+      <CardActionArea sx={{borderRadius:'20px'}} onClick={() => onCardClick(glasses.id)}>
         <CardMedia
           component="img"
           height="140"

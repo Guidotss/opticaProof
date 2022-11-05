@@ -23,7 +23,11 @@ export const glassesSlice = createSlice({
         },
         clearErrorMessage: (state) => {
             state.errorMessage = undefined;
+        },
+        findGlassesById: (state, { payload }) => {
+            state.glasses = payload;
         }
+
     }
 });
 
