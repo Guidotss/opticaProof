@@ -12,8 +12,8 @@ export const AllGlassesAdminPage = () => {
           Todos los anteojos
         </h1>
       </Box>
-      <Box sx={{justifyContent:'center', width:'90vw'}}>
-        <Box sx={{display:'flex', justifyContent:'space-around', margin:'auto', flexWrap:'wrap', flexDirection:'row', marginLeft:50}}>
+      <Box sx={{justifyContent:'center', width:'calc(80% - 50px)', marginLeft:'20vw', marginTop:'5vh'}}>
+        <Box sx={{display:'flex', justifyContent:'space-around', margin:'auto', flexWrap:'wrap', flexDirection:'row'}}>
           <GlassesAdminList/>
         </Box>
       </Box>
