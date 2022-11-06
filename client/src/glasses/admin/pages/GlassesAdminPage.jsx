@@ -27,6 +27,15 @@ export const GlassesAdminPage = () => {
           Anteojos
         </h1>
       </Box>
+      <Box>
+        <Box>
+          <img 
+            style={{width:'40vw', height:'50vh'}}
+            src={glasses.image} 
+            alt={`${glasses.name}.jpg`} 
+          />
+        </Box>
+      </Box>
     </AdminGlassesLayOut>
   )
 }

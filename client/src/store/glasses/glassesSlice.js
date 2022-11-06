@@ -14,7 +14,6 @@ export const glassesSlice = createSlice({
         },
         checkingGlasses: (state) => {
             state.status = 'checking';
-            state.glasses = {};
         },
 
         getAllGlasses: (state, { payload }) => {
