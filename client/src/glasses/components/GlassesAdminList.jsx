@@ -1,22 +1,27 @@
-import glasses from '../../data/glassesMock.json';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAdminGlasses } from '../../hooks/useAdminGlasses';
 import { GlassesAdminCard } from './GlassesAdminCard';
 
 
 
 export const GlassesAdminList = () => {
+  
 
-  if(glasses === undefined) return; 
-  const { Glasses } = glasses;
-
-
-
+  const { startGetAllGlasses, glasses,startFindGlasses } = useAdminGlasses();
+  
+  useEffect(() => {
+    startGetAllGlasses();
+  }, []);
+  
+  if(glasses.length  === undefined) return;
   return(
     <>
       {
-        Glasses.map( glasses => (
-          <GlassesAdminCard key={glasses.id} glasses={glasses}/>
+        glasses.map(glassesItem => (
+          <GlassesAdminCard key={glassesItem._id} glasses={ glassesItem }/>
         ))
       }
-    </>    
+    </>
   )
 }

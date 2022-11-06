@@ -14,8 +14,18 @@ export const glassesSlice = createSlice({
         },
         checkingGlasses: (state) => {
             state.status = 'checking';
+            state.glasses = {};
         },
 
+        getAllGlasses: (state, { payload }) => {
+            state.status = 'uploaded';
+            state.glasses = payload;
+        },
+        
+        findGlassesById: (state, { payload }) => {
+            state.status = 'uploaded';
+            state.glasses = payload;
+        },
         errorUplodingGlasses: (state, { payload }) => {
             state.status = 'error';
             state.glasses = {};
@@ -23,12 +33,18 @@ export const glassesSlice = createSlice({
         },
         clearErrorMessage: (state) => {
             state.errorMessage = undefined;
-        },
-        findGlassesById: (state, { payload }) => {
-            state.glasses = payload;
         }
 
     }
 });
 
-export const { uploadGlasses, checkingGlasses,clearErrorMessage,errorUplodingGlasses } = glassesSlice.actions;
+export const { 
+    
+    uploadGlasses, 
+    checkingGlasses,
+    clearErrorMessage,
+    getAllGlasses,
+    findGlassesById,
+    errorUplodingGlasses
+
+} = glassesSlice.actions;

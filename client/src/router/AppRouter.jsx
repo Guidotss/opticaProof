@@ -11,6 +11,7 @@ import { CheckingAuth } from '../ui'
 export const AppRouter = () => {
 
   const { status,checkAuthToken,checkAdminCredentials,isAdmin } = useAuthStore(); 
+  
   useEffect(() => {
     checkAuthToken();
   },[]);

@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fileUpload } from '../helpers/fileUpload';
 import { opticaApi } from '../api';
-import { uploadGlasses,checkingGlasses,clearErrorMessage,errorUplodingGlasses } from '../store/glasses/glassesSlice';
+import { uploadGlasses,checkingGlasses,clearErrorMessage,errorUplodingGlasses, findGlassesById, getAllGlasses } from '../store/glasses/glassesSlice';
 
 export const useAdminGlasses = () => {
     
     const dispatch = useDispatch();
-    const {status, glasses, errorMessage} = useSelector( (state) => state.glasses );
+    const { status, glasses, errorMessage } = useSelector( (state) => state.glasses );
 
     const startUploadingFile = async ( file=[] ) => {        
         try{
@@ -32,7 +32,6 @@ export const useAdminGlasses = () => {
         if(!token) return dispatch( errorUplodingGlasses('No token found') );
         
         try{ 
-            console.log(newGlasses);
             const { data } = await opticaApi.post('glasses/createGlasses', newGlasses);
             if(data.ok){
                 dispatch( uploadGlasses(data.newGlasses) );
@@ -45,7 +44,42 @@ export const useAdminGlasses = () => {
         }
     }
     
-    const startFindGlasses = async ( id ) => {}
+    const startGetAllGlasses = async () => {
+
+        dispatch( checkingGlasses() );
+
+        const token = localStorage.getItem('token');
+
+        if(!token) return dispatch( errorUplodingGlasses('No token found') );
+
+        try{
+
+            const { data } = await opticaApi.get('/glasses');
+            if(data.ok){
+                dispatch( getAllGlasses(data.glasses) );
+            }
+
+        }catch(error){
+            console.log(error); 
+            return dispatch( errorUplodingGlasses({errorMessage:error}) );
+        }
+
+    }
+    const startFindGlasses = async ( id ) => {
+        dispatch( checkingGlasses() );
+
+        const token = localStorage.getItem('token');
+        if(!token) return dispatch( errorUplodingGlasses('No token found') );
+
+        try{
+            const {data} = await opticaApi.get(`/glasses/${id}`);
+            dispatch( findGlassesById(data.glasses) );
+            
+        }catch(error){
+            console.log(error);
+            return dispatch( errorUplodingGlasses({errorMessage:error}) ); 
+        }
+    }
 
     return {
         status,
@@ -53,6 +87,8 @@ export const useAdminGlasses = () => {
         errorMessage,
 
         startUploadingFile,
-        startUploadingGlasses
+        startUploadingGlasses,
+        startGetAllGlasses,
+        startFindGlasses
     }
 }

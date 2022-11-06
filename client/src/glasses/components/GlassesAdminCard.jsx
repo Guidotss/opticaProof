@@ -4,19 +4,21 @@ import { Card, CardActionArea,CardMedia, CardContent, CardActions, Button, Typog
 
 
 
-export const GlassesAdminCard = ({ glasses }) => {
-  
+export const GlassesAdminCard = ({ glasses}) => {
+
   const navigate = useNavigate();
 
-  const onCardClick = ( id ) => {
+  const onCardClick = (id) => {
     navigate(`/admin/glasses/${id}`);
   }
+
 
   return (
     <Card 
       sx={{ 
       maxWidth: 345, 
       marginBottom:3, 
+      marginRight:2.7,
       padding:2, 
       borderRadius:'20px', 
         '&:hover':{
@@ -25,11 +27,11 @@ export const GlassesAdminCard = ({ glasses }) => {
           transition: 'all 0.3s ease-in-out',
         } 
     }}>
-      <CardActionArea sx={{borderRadius:'20px'}} onClick={() => onCardClick(glasses.id)}>
+      <CardActionArea sx={{borderRadius:'20px'}} onClick={() => onCardClick(glasses._id)} >
         <CardMedia
           component="img"
           height="140"
-          image={glasses.img}
+          image={glasses.image}
           alt={glasses.name}
         />
         <CardContent>
@@ -40,26 +42,36 @@ export const GlassesAdminCard = ({ glasses }) => {
       <CardActions sx={{justifyContent:'space-between'}}>
         <Button 
           size="small"
-          sx={{color:'inherit',
-          backgroundColor:'orange',
-            '&:hover':{
-                backgroundColor:'orange', 
-                transform:'scale(1.04)', 
-                transition:'0.1s'
-              }
+          sx={{
+            color:'inherit',
+            fontWeight:'bold',
+            fontFamily:'system-ui',
+            padding:'7px',
+            borderRadius:'10px',
+            backgroundColor:'orange',
+              '&:hover':{
+                  backgroundColor:'orange', 
+                  transform:'scale(1.04)', 
+                  transition:'0.1s'
+                },
           }}
         >Editar</Button>
 
         <Button 
           size="small"
           sx={{
-          color:'inherit', 
-          backgroundColor:'salmon', 
-            '&:hover':{
-                backgroundColor:'salmon', 
-                transform:'scale(1.04)', 
-                transition:'0.1s'
-              }
+            color:'inherit', 
+            fontWeight:'bold',
+            fontFamily:'system-ui',
+            padding:'7px',
+            borderRadius:'10px',
+            backgroundColor:'salmon', 
+              '&:hover':{
+                  backgroundColor:'salmon', 
+                  transform:'scale(1.04)', 
+                  transition:'0.1s'
+                },
+          
           }}
         >Eliminar</Button>
 

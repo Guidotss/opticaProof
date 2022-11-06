@@ -1,14 +1,23 @@
 import { Box } from '@mui/material';
+import { useEffect } from 'react';
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAdminGlasses } from '../../../hooks';
 import { AdminGlassesLayOut } from '../../layout/AdminGlassesLayOut';
 
 
 export const GlassesAdminPage = () => {
 
   const { id } = useParams();
-  
+  const { startFindGlasses, glasses } = useAdminGlasses();
 
+  useEffect(() => {
+    startFindGlasses(id);
+  }, [id]);
+
+
+
+  console.log({ glasses });
 
 
   return (
