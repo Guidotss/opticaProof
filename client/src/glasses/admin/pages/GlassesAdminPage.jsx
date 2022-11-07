@@ -17,7 +17,9 @@ export const GlassesAdminPage = () => {
 
 
 
-  console.log({ glasses });
+  const glassesData = useMemo(() => {
+    return glasses;
+  }, [glasses]);
 
 
   return (
@@ -29,10 +31,17 @@ export const GlassesAdminPage = () => {
       </Box>
       <Box>
         <Box>
+        
           <img 
-            style={{width:'40vw', height:'50vh'}}
-            src={glasses.image} 
-            alt={`${glasses.name}.jpg`} 
+            style={{
+              width:'50vw', 
+              height:'60vh', 
+              borderRadius:'20px', 
+              marginTop:'20px',
+              marginLeft:'20vw', 
+            }}
+            src={glassesData.image} 
+            alt={`${glassesData.name}.jpg`} 
           />
         </Box>
       </Box>
