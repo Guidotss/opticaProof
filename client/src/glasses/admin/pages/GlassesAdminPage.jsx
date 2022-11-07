@@ -25,7 +25,10 @@ export const GlassesAdminPage = () => {
   
   if(JSON.stringify(glasses) === '{}') return; 
   
-  console.log(name);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log({name, brand, description});
+  }
 
   return (
     <AdminGlassesLayOut>
@@ -73,58 +76,63 @@ export const GlassesAdminPage = () => {
           <Typography gutterBottom variant="h5" component="div" sx={{fontWeight:'bold', fontSize:'30px', marginBottom:'50px'}}>
             Detalles
           </Typography>
-         <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <TextField
-                fullWidth
-                label="Nombre"
-                focused
-                color="warning"
-                name='name'
-                value={ name }
-                onChange={ onInputChange }
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
+         <Grid container spacing={ 2 }>
+                <Grid item xs={6}>
 
-                fullWidth
-                focused
-                color='warning'
-                label="Marca"
-                name='brand'
-                value={ brand }
-                onChange={ onInputChange }
-                
-              />
-            </Grid>
-                <Grid item xs={12}>
-                  <TextField
-    
-                    fullWidth
-                    label="descripcion"
-                    focused
-                    color='warning'
-                    name='description'
-                    value={ description }
-                    onChange={ onInputChange }
-                    rows={4}
-                  />
+                    <TextField
+                      fullWidth
+                      label="Nombre"
+                      focused
+                      color="warning"
+                      name='name'
+                      value={ name }
+                      onChange={ onInputChange }
+                    />
                 </Grid>
-           </Grid>
-           <IconButton
-              sx={{marginTop:5,borderRadius:'0'}}
-              variant="contained"
-              color="warning"
-              aria-label="upload picture"
-              component="span"
-            >
-              <Edit />
-              <Typography variant="body2" color="warning" sx={{fontWeight:'bold', fontSize:'20px'}}>
-                Editar
-              </Typography>
-            </IconButton>
-          </Box>
+
+                <Grid item xs={6}>
+                    <TextField
+
+                      fullWidth
+                      focused
+                      color='warning'
+                      label="Marca"
+                      name='brand'
+                      value={ brand }
+                      onChange={ onInputChange }
+                      
+                    />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <TextField
+          
+                        fullWidth
+                        label="descripcion"
+                        focused
+                        color='warning'
+                        name='description'
+                        value={ description }
+                        onChange={ onInputChange }
+                        rows={4}
+
+                        />
+                </Grid>
+            </Grid>
+                <IconButton
+                    sx={{marginTop:5,borderRadius:'0'}}
+                    variant="contained"
+                    color="warning"
+                    aria-label="upload picture"
+                    component="span"
+                  >
+                      <Edit />
+                      <Typography variant="body2" color="warning" sx={{fontWeight:'bold', fontSize:'20px'}}>
+                        Editar
+                      </Typography>
+                  </IconButton>
+                
+        </Box>
       </Box>
     </AdminGlassesLayOut>
   )
