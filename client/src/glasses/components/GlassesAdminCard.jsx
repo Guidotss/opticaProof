@@ -16,9 +16,10 @@ export const GlassesAdminCard = ({ glasses}) => {
   return (
     <Card 
       sx={{ 
+      width: 345,
       maxWidth: 345, 
       marginBottom:3, 
-      marginRight:2.7,
+      marginRight:2.5,
       padding:2, 
       borderRadius:'20px', 
         '&:hover':{
