@@ -32,6 +32,31 @@ export async function getGlassesById( req, res ){
     }
 }
 
+export async function getGlassesByName( req, res ){
+    const { name } = req.params; 
+
+    try{
+        const glasses = await glassesClass.getGlassesByName(name);
+        if(glasses.length === 0){
+            return res.status(404).json({
+                ok: false,
+                msg: 'Glasses not found'
+            });
+        }else{
+
+            return res.status(200).json({
+                ok: true,
+                glasses
+            });
+        }
+    }catch(error){
+        return res.status(404).json({
+            ok:false,
+            msg: 'Glasses not found'
+        })
+    }
+}
+
 export async function createGlasses( req, res ){
     try{  
         const newGlasses = await glassesClass.createGlasses(req.body);

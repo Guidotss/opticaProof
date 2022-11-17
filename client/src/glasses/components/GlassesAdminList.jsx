@@ -6,7 +6,6 @@ import { GlassesAdminCard } from './GlassesAdminCard';
 
 
 export const GlassesAdminList = () => {
-  
 
   const { startGetAllGlasses, glasses,startFindGlasses } = useAdminGlasses();
   

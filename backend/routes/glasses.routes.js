@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { getAllGlasses,getGlassesById, createGlasses,updatedGlasses,deleteGlasses } from '../controllers/glassesControllers';
+import { getAllGlasses,getGlassesById, createGlasses,updatedGlasses,getGlassesByName,deleteGlasses } from '../controllers/glassesControllers';
 import { isAuth } from '../auth/middlewares/isAuth.js';
 import { validateErrors } from '../auth/middlewares/validate-errors.js';
 
 const router = Router();
 
 router.get('/',getAllGlasses);
+router.get('/find/:name',getGlassesByName); 
 router.get('/:id', getGlassesById);
 router.post(
     '/createGlasses',

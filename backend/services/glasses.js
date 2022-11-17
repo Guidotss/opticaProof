@@ -16,10 +16,23 @@ export class Glasses {
         }
     }
 
+    async getGlassesByName(glassesName){
+        try{
+            const glasses = await this.collection.find({name: glassesName}); 
+            return glasses; 
+
+        }catch(error){
+            console.log(error); 
+            throw new Error(`Error:${error}`); 
+        }
+    }
+
     async getGlassesById(id) {
         try{
+            
             const glasses = await this.collection.findById(id);
             return glasses;
+
         }catch(err){
             console.log(err);
             throw new Error(`Error: ${err}`);
